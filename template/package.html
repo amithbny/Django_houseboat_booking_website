@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Houseboat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/nxt.css' %}">
+</head>
+{% block base %}
+<body class="houseboat">                
+
+    <div class="con-5">
+        <div class="con-1">
+            <div class="content-1">
+                <h2>Choose Your Package</h2>
+                <p>House boats are available at Thiruvananthapuram, Kollam, Kottayam, Allappuzha, Ernakulam, Thrissur and Kasaragod. Please contact DTPCs for more info.</p>
+            </div>
+            <div class="srch">
+                <form action="{% url 'package' %}">
+                    <input type="text" name="srch" class="search-1" placeholder="Look for your Stay" >
+                    <input class="icon" type="submit" value="Search"> 
+                </form>
+            </div>
+        </div>
+        {% for i in package %}
+        <div class="card">
+            <div class="image">
+                <img src="/test/{{i.image}}" alt="">
+            </div>
+            <div class="card-item">
+                <h3>{{i.title}}</h3>
+                <!-- <ul>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </ul> -->
+                <p>{{i.description}}</p>
+                <div class="btns">
+                    <a href="{% url 'package_detail' i.id %}">See details</a>
+                    <button class="icon"><a href="{% url 'booking' %}">BOOK NOW</a></button>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>                
+    {% endblock %}
+</body>
+</html>
+

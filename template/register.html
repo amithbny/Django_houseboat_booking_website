@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block base %}
+<body class="houseboat">
+  <div class="con-5">
+    <form class="frm" method="post">
+        {% csrf_token %}
+        <div class="con-2">
+          <label class="form-label">Username</label>
+          {{form.username}}
+        </div>
+
+        <div class="con-2">
+          <label class="form-label">Email</label>
+          {{form.email}}
+        </div>
+
+
+        <div class="con-2">
+          <label class="form-label">Password</label>
+          {{form.password1}}
+        </div>
+        <div class="con-2">
+          <label class="form-label">Confirm Password</label>
+          {{form.password2}}
+        </div>
+
+        <div class="log">
+          <button type="submit" class="login ">Register</button>
+        </div>
+    </form>
+    {{form.errors}}
+
+  </div>
+
+</body>
+{% endblock %}
+  

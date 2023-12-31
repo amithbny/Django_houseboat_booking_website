@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<header>
+    <div class="logo">HouseBoats</div>
+    <ul class="menu">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'houseboat' %}">HouseBoats</a></li>
+        <li><a href="{% url 'package' %}">Packages</a></li>
+        <li><a href="{% url 'tariff' %}">Tariff</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        {% endif %}
+    </ul>
+    <div class="prof">
+        <ul class="menu menu-2">
+            <a href="{% url 'booking' %}">BOOK NOW</a>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Log-out</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</header>

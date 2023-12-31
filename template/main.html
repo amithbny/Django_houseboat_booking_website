@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="main">
+    <header>
+        <div class="logo">HouseBoats</div>
+        <ul class="menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'houseboat' %}">HouseBoats</a></li>
+            <li><a href="{% url 'package' %}">Packages</a></li>
+            <li><a href="{% url 'tariff' %}">Tariff</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            {% endif %}
+        </ul>
+        <div class="prof">
+            <ul class="menu menu-2">
+                {% if not user.is_authenticated %}
+                <li><a href="{% url 'login' %}">Login</a></li>  
+                <li><a href="{% url 'register' %}">Sign up</a></li>           
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'register' %}">Sign up</a></li>
+                <li><a href="{% url 'logout' %}">Log-out</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+
+    <div class="slide">
+        <div class="list">    
+            {% for i in content %}
+            <div class="item active ">
+                <img src="/test/{{i.images}}" alt="">
+                <div class="content">
+                    <h3>{{i.header}}</h3>
+                    <p>{{i.description}}</p>
+                    <button class="detail"><a href="{% url 'houseboat' %}">See more</a></button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="arrows">
+        <button id="prev"><</button>
+        <button id="next">></button>
+    </div>
+
+    <div class="thumbnail">
+        {% for i in content %}
+        <div class="item active">
+            <img src="/test/{{i.images}}" alt="">
+            <div class="content">
+                {{i.location}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

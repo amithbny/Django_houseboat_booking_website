@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block base %}
+<body class="houseboat">
+    <section class="filter">
+        <table class="table"> 
+            <tr> 
+                <th>Menu Time</th> 
+                <th>Menu</th> 
+            </tr> 
+            {% for i in menu_detail %} 
+            <tr> 
+                <td>{{i.menu_time}}</td> 
+                <td>{{i.menu}}</td> 
+            </tr> {% endfor %} 
+        </table> 
+    </section>
+</body>
+{% endblock %}
+
+

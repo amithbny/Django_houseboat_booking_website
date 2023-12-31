@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block base %}
+<body class="houseboat">
+  <div class="con-5">
+    <form class="frm" method="post">
+        {% csrf_token %}
+        <div class="choices">
+          <div class="con-2">
+            <label class="form-label">Houseboat</label>
+            {{form.houseboat}}
+          </div>
+  
+          <div class="con-2">
+            <label class="form-label">Package</label>
+            {{form.package}}
+          </div>
+        </div>
+        <div class="choices">
+          <div class="con-2">
+            <label class="form-label">Arrival date</label>
+            {{form.check_in_date}}
+          </div>
+          <div class="con-2">
+              <label class="form-label">Return date</label>
+              {{form.check_out_date}}
+          </div>
+        </div>
+        <div class="choices">
+          <div class="con-2">
+            <label class="form-label">Email</label>
+            {{form.email}}
+          </div>
+          <div class="con-2">
+            <label class="form-label">Rooms Needed</label>
+            {{form.rooms}}
+          </div>
+        </div>
+
+
+        <div class="log">
+          <button type="submit" class="login ">Proceed to Paying</button>
+        </div>
+    </form>
+    {{form.errors}}
+
+  </div>
+
+</body>
+{% endblock %}
+  

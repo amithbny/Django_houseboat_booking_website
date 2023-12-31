@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% block base %}
+<body class="houseboat">
+    <div class="con-3">
+        <h2>{{detail_pg.title}}</h2>
+        <div class="detail-content"> 
+            <div class="img-container">
+                <img class="img_hero" src="/test/{{detail_pg.image}}" alt="">
+            </div>
+
+            <div class="description">
+                <p class="txt">{{detail_pg.description}}</p>
+                <p>{{detail_pg.about_destination}}</p>
+                <h3><span class="price">Price</span> ₹{{detail_pg.price}}</h3>
+
+                <button class="icon"><a href="{% url 'booking' %}">BOOK NOW</a></button>
+            </div>
+        </div>  
+        <div class="middle-des">
+            <p>{{detail_pg.about_destination}}</p>
+            <p>{{detail_pg.main_des}}</p>
+        </div>
+    </div>
+    <section>
+        <table> 
+            <tr> 
+                <th>Menu Time</th> 
+                <th>Menu</th> 
+            </tr> 
+            {% for i in menu_detail %} 
+            <tr> 
+                <td>{{i.menu_time}}</td> 
+                <td>{{i.menu}}</td> 
+            </tr> {% endfor %} 
+        </table> 
+    </section>
+
+</body>
+<footer>
+    {% include 'footer.html' %}
+</footer>
+
+{% endblock %}
+</html>
+

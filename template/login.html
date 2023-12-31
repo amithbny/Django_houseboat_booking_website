@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block base %}
+<body class="houseboat">
+    <div class="con-5">
+        <form class="frm" method="post">
+            {% csrf_token %}
+            <div class="con-2">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" placeholder="Enter Username" class="form-control">
+            </div>
+            
+            <div class="con-2">
+                <label class="form-label">Password</label>
+                <input type="password"  name="password" placeholder="Enter Password" class="form-control">
+            </div>
+
+            <div class="log">
+                <input type="submit" value="Log-in" class="login">
+            </div>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

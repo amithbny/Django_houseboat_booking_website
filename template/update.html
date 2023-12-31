@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block base %}
+<body class="houseboat">
+  <div class="con-5">
+    <form class="frm" method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <div class="con-2">
+          <label class="form-label">Username</label>
+          {{form.name}}
+        </div>
+
+        <div class="con-2">
+          <label class="form-label">Email</label>
+          {{form.email}}
+        </div>
+
+
+        <div class="con-2">
+          <label class="form-label">Profile Bio</label>
+          {{form.bio}}
+        </div>
+        <div class="con-2">
+          <label class="form-label">Phone</label>
+          {{form.phone}}
+        </div>
+
+        <div class="con-2">
+            <label class="form-label">Profile Image</label>
+            {{form.profile_image}}
+        </div>
+        
+        <div class="log">
+          <button type="submit" class="login ">Update</button>
+        </div>
+    </form>
+    {{form.errors}}
+
+  </div>
+
+</body>
+{% endblock %}
+  
