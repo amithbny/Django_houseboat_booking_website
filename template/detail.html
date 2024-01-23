@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-{% block base %}
+<!-- {% block base %}
 <body class="houseboat">
     <div class="con-3">
         <h2>{{detail_pg.title}}</h2>
@@ -30,6 +31,45 @@
 <footer>
     {% include 'footer.html' %}
 </footer>
+
+{% endblock %} -->
+{% block 'base' %}
+<div class="container" enctype="multipart/form-data">
+    <h5>{{detail_pg.title}}</h5>
+    <div class="des_pg">
+        
+        <div class="des_image">
+            <img class="img_hero" src="/test/{{detail_pg.image}}" alt="">
+        </div>
+
+        <div class="description">
+            <p class="txt">{{detail_pg.description}}</p>
+            <h6>{{detail_pg.about_destination}}</h6>
+            <button class="des_btn">
+                Add to cart
+            </button>
+            <button class="des_btn">Buy</button>
+        </div>
+    </div>
+    <hr>
+    <div class="middle_img">
+        <img src="/home/{{pro.img}}" alt="">
+        <img src="/home/{{pro.img}}" alt="">
+        <img src="/home/{{pro.img}}" alt="">
+    </div>
+    <div class="middle">
+        <h5>DESCRIPTION</h5>
+        <div class="des_list">
+            <ul>
+                <li>{{pro.des}}</li>
+                <li>{{pro.des}}</li>
+                <li>{{pro.des}}</li>
+                <li>{{pro.des}}</li>
+            </ul>
+        </div>
+    </div>
+    
+</div>
 
 {% endblock %}
 </html>

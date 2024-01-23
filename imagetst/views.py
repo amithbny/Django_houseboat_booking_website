@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail
 
+
+
 # Create your views here.
 
 # Home Page
@@ -46,12 +48,6 @@ def package_detail_pg(request,id):
     package_detail_pg = Package.objects.get(id=id)
     return render(request, 'detail.html', {'detail_pg':package_detail_pg})
 
-# Detail Page for Hoseboats and menu
-
-def house_detail_pg(request,id):
-    house_detail_pg = HouseBoat.objects.get(id=id)
-    menu_detail= Menu.objects.all()
-    return render(request, 'house_detail.html', {'detail_pg':house_detail_pg,'menu_detail':menu_detail})
 
 # tariff
 
@@ -79,6 +75,13 @@ def profile(request):
     profile = Profile.objects.get(user=user)
     booking = BoatBooking.objects.filter(user=request.user)
     return render(request,'profile.html',{'profile':profile,'booking':booking})
+
+# deleting booking
+@login_required
+def delBooking(request,id):
+    bookingid = BoatBooking.objects.get(id=id)
+    bookingid.delete()
+    return redirect('profile')
 
 # Update Page
 
@@ -145,4 +148,3 @@ def logOut(request):
     logout(request)
     return redirect(home)
     
-

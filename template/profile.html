@@ -81,6 +81,7 @@
                                 <ul>
                                     {% for i in booking %}
                                     <p class="text-muted" style="font-size: 14px;">you have booked <span style="font-weight: bold;">{{i.houseboat}} </span>with <span>{{i.package}}</span> from <span>{{i.check_in_date}}</span> to <span>{{i.check_out_date}}</span></p>
+                                    <a class="btn btn-primary" href="{% url 'delete' i.id %}" role="button">Delete Booking</a>
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -92,6 +93,7 @@
                       </div>
 
                       <a class="btn btn-primary" href="{% url 'update' profile.id %}" role="button">Edit Profile</a>
+                      
                     </div>
                   </div>
                 </div>
