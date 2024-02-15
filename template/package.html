@@ -32,14 +32,9 @@
             </div>
             <div class="card-item">
                 <h3>{{i.title}}</h3>
-                <!-- <ul>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                </ul> -->
+
                 <p>{{i.description}}</p>
+                
                 <div class="btns">
                     <a href="{% url 'package_detail' i.id %}">See details</a>
                     <button class="icon"><a href="{% url 'booking' %}">BOOK NOW</a></button>

@@ -1,14 +1,15 @@
 from django.shortcuts import render,redirect
+from django.http import JsonResponse
 from django.utils import timezone
-from  .models import Heading,Slide,HouseBoat,Package,Menu,Profile,BoatBooking
-from .forms import Regform,Update,BookingRegister
+from  .models import Heading,Slide,HouseBoat,Package,Menu,Profile,BoatBooking,PackageReview
+from .forms import Regform,Update,BookingRegister,ReviewForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail
-
-
+from django.contrib.auth.models import User
+from django.db.models import Avg
 
 # Create your views here.
 
@@ -45,9 +46,33 @@ def packages(request):
 # Detail Page for Packages
 
 def package_detail_pg(request,id):
-    package_detail_pg = Package.objects.get(id=id)
-    return render(request, 'detail.html', {'detail_pg':package_detail_pg})
+    package = Package.objects.get(id=id)
+    # showing all review 
+    reviews = PackageReview.objects.filter(package=package).order_by("-date")
+    # getting average reviews related to a product
+    average_review = PackageReview.objects.filter(package=package).aggregate(rating=Avg('rating'))
+    # reviewform
+    if request.method == 'POST':
+        form = ReviewForm(request.POST or None)
+        if form.is_valid():
+            review = PackageReview.objects.create(
+                user = request.user,
+                package = package,
+                review = request.POST['review'],
+                rating = request.POST['rating']
+            )
+            review.save()
+            return redirect('package_detail',id=id)
+    else:
+        form = ReviewForm()
 
+    context = {
+        'detail_pg':package,
+        'reviews':reviews,
+        'form':form,
+        'average_review':average_review
+    }
+    return render(request, 'detail.html',context)
 
 # tariff
 
@@ -148,3 +173,5 @@ def logOut(request):
     logout(request)
     return redirect(home)
     
+
+

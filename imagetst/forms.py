@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import BoatBooking,HouseBoat,Package
+from .models import BoatBooking,HouseBoat,Package,PackageReview
 
 class Regform(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(
@@ -75,7 +75,23 @@ class BookingRegister(forms.ModelForm):
             'class' : 'form-control'
         }
     ))
-
+# HOUSEBOATS = (
+#     ("Three Bedroom Premium","Three Bedroom Premium"),
+#     ("Two Bedroom Premium","Two Bedroom Premium"),
+#     ("One Bedroom Premium","One Bedroom Premium"),
+#     ("Three Bedroom Deluxe","Three Bedroom Deluxe"),
+#     ("Two Bedroom Deluxe","Two Bedroom Deluxe"),
+#     ("One Bedroom Deluxe","One Bedroom Deluxe"),
+# )
+#     houseboat = forms.ChoiceField(
+#         choices=HOUSEBOATS,
+#         widget=forms.Select(
+#             attrs={
+#                 'placeholder':'Select a houseboat...',
+#                 'class' : 'form-control'
+#             }
+#         )
+#     )
     package = forms.ModelChoiceField(queryset=Package.objects.all(),widget=forms.Select(
         attrs={
             'class' : 'form-control'
@@ -110,3 +126,29 @@ class BookingRegister(forms.ModelForm):
     class Meta:
         model = BoatBooking
         fields = ['houseboat','package','check_in_date','check_out_date','rooms','email']
+
+class ReviewForm(forms.ModelForm):
+    RATING = (
+    (1,"★☆☆☆☆"),
+    (2,"★★☆☆☆"),
+    (3,"★★★☆☆"),
+    (4,"★★★★☆"),
+    (5,"★★★★★")
+)
+    review = forms.CharField(
+        widget=forms.TextInput(
+        attrs={
+            'placeholder':'Write a review...',
+            'class': 'rev-inp'
+        }
+    ))
+    rating = forms.ChoiceField(
+        choices=RATING,
+        widget=forms.Select(
+        attrs={
+            'class': 'rating'
+        }
+    ))
+    class Meta:
+        model = PackageReview
+        fields = ['review', 'rating']

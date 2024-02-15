@@ -25,8 +25,17 @@ class Menu(models.Model):
     def __str__(self):
         return self.menu_time
 
+HOUSEBOATS = (
+    ("Three Bedroom Premium","Three Bedroom Premium"),
+    ("Two Bedroom Premium","Two Bedroom Premium"),
+    ("One Bedroom Premium","One Bedroom Premium"),
+    ("Three Bedroom Deluxe","Three Bedroom Deluxe"),
+    ("Two Bedroom Deluxe","Two Bedroom Deluxe"),
+    ("One Bedroom Deluxe","One Bedroom Deluxe"),
+)
+
 class HouseBoat(models.Model):
-    title = models.CharField(max_length=150)
+    title = models.CharField(choices=HOUSEBOATS, max_length=150,default=None)
     image = models.ImageField(upload_to='slide_img', null= True)
     price = models.IntegerField(blank=True)
     description = models.TextField(null= True,blank=True)
@@ -44,6 +53,7 @@ class Package(models.Model):
     main_des = models.TextField(null= True,blank=True)
     about_destination = models.TextField(null= True,blank=True)
     quick_facts = models.TextField(null= True,blank=True)
+
 
     def __str__(self):
         return self.title
@@ -69,3 +79,24 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+# rating and review section
+RATING = (
+    (1,"★☆☆☆☆"),
+    (2,"★★☆☆☆"),
+    (3,"★★★☆☆"),
+    (4,"★★★★☆"),
+    (5,"★★★★★")
+)
+class PackageReview(models.Model):
+    user = models.ForeignKey(User,on_delete=models.SET_NULL, null=True)
+    package = models.ForeignKey(Package,on_delete=models.SET_NULL, null=True,related_name="review")
+    review = models.TextField(null=True)
+    rating = models.IntegerField(choices=RATING, default=None)
+    date = models.DateTimeField(auto_now_add=True)
+
+    # def __str__(self):
+    #     return self.package.title
+
+    def get_rating(self):
+        return self.rating      

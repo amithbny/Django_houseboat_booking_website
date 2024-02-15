@@ -387,7 +387,7 @@ header .prof .menu{
 }
 .img-container{
     width: 60%;
-    display: flex;
+    display: flex; 
     justify-content: center;
 }
 .img-container img{

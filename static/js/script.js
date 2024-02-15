@@ -52,3 +52,18 @@ thumbnails.forEach((thumbnail, index) => {
 
 const alertList = document.querySelectorAll('.alert')
 const alerts = [...alertList].map(element => new bootstrap.Alert(element))
+
+// rating
+
+const rate = (rating, post_id) => {
+    fetch(`/rate/${post_id}/${rating}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(rest => {
+        window.location.reload();
+        // you may want to update the rating here
+        // to simplify stuff, I just reload the page
+    })
+}

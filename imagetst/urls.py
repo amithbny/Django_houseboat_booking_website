@@ -16,7 +16,8 @@ urlpatterns = [
     path('update<int:id>',views.updateProfile,name='update'),
     path('booking',views.bookingForm,name='booking'),
     path('login',views.loginPage,name='login'),
-    path('logout',views.logOut,name='logout')
+    path('logout',views.logOut,name='logout'),
+    # path('review<int:id>',views.reviewForm,name='review')
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
