@@ -95,8 +95,8 @@ class PackageReview(models.Model):
     rating = models.IntegerField(choices=RATING, default=None)
     date = models.DateTimeField(auto_now_add=True)
 
-    # def __str__(self):
-    #     return self.package.title
+    def __str__(self):
+        return self.package.title
 
     def get_rating(self):
         return self.rating      

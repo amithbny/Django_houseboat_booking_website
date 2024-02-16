@@ -68,42 +68,53 @@
         <div class="review">
           
           <div class="details">
-            <form method="post" id="commentForm" >
+            <div class="form">
               <div class="heading">
                 <h4>Reviews({{reviews.count}})</h4>
               </div>
-      
               {% for i in reviews %}
               <div class="prof">
-                <strong>{{i.user.username|title}}</strong>
+                <strong>{{i.user.username|title}}|{{i.date|date:"d M.Y"}}</strong>
+                <p></p>
               </div>
-              {{i.review}}
+              <p>{{i.review}}</p>
               <strong>Rating : {{i.rating}}</strong>
-              <p>{{i.date|date:"d M.Y"}}</p>
+              
               <hr>
               {% endfor %}
-              {% csrf_token %} 
-              <div class="rate">
-                {{form.rating}} </div>
-              <div class="sb-1">
-                {{form.review}}
-                <input class="submit" type="submit"  value="Submit Review"/>
-              </div>      
-              
-              {{detail_pg.date}}
-            </form>
+            </div>
           </div>
           <div class="details-r">
-            <span class="heading">User Rating</span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <p>{{average_review.rating|floatformat:1}} average based on {{review.count}} reviews.</p>
-            <hr style="border:3px solid #f1f1f1">
+            <strong><span class="heading">User Rating: </span></strong>
+            <h3>{{average_review.rating|floatformat:1}}  average based on {{reviews.count}} reviews.</h3>
+            <!-- <div class="app">
+              <div class="score">
+                <div class="rating_average">
+                  
+                  <div class="star_outer">
+                    <div class="star-inner">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                  </div>
+                  <p>200000</p>
+                </div>
+                <div class="rating_progress">
+                </div>
+              </div>
+            </div> -->
 
-            <div class="row">
+            <form method="post">
+              {% csrf_token %}
+              <div class="items">
+                <div class="sb-1">
+                {{form.review}}
+                </div> 
+                <div class="rate">
+                  {{form.rating}} 
+                </div>
+              </div>
+              
+              <input class="submit" type="submit"  value="Submit Review"/>
+            </form>
+            <!-- <div class="row">
               <div class="side">
                 <div>5 star</div>
               </div>
@@ -160,8 +171,8 @@
                 <div>20</div>
               </div>
             </div>
-          </div>
-        </div>
+          </div>-->
+        </div> 
         
     </div>
     
